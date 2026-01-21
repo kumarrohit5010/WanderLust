@@ -1,0 +1,196 @@
+
+<% layout("/layouts/boilerplate.ejs") %>
+<!-- for using boilerplate  -->
+
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+    .filter{
+        text-align: center;
+        margin-right: 1.2rem;
+        opacity: 0.7;
+        padding: 0.4rem 0.6rem;
+        border-radius: 0.75rem;
+        transition: all 150ms ease-in-out;
+    }
+    .filter:hover{
+        opacity:1;
+    }
+    .filter.active{
+        /* background: #feefef; */
+        color: #e43d4f;
+        opacity: 1;
+        /* box-shadow: 0 4px 12px rgba(0,0,0,0.08); */
+        /* transform: translateY(-2px); */
+        /* border: 0.5px solid #e43d4f;  */
+    }
+    .filter.active i,
+    .filter.active p{
+        color: #e43d4f;
+    }
+    .filter p{
+        font-size: 0.8rem;
+       
+    }
+    .tax-info{
+        display: none;
+    }
+    .switch-toggle{
+        border: 1px solid rgb(218, 209, 209);
+        border-radius:1rem;
+        padding:1rem;
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        opacity: 0.7;
+        margin-left: 4rem;
+    }
+    .switch-toggle:hover{
+        opacity: 1;
+    }
+
+    .no-results{
+        /* border: 0.5px solid #bf8f94; */
+        background: #fff7f8;
+        color: #b32233;
+        font-weight: 600;
+        text-align: center;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 4px 12px rgba(34, 28, 29, 0.15);
+    }
+</style>
+<body>
+    <div id="filters">
+        <div class="filter" data-category="Trending">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+
+        <div class="filter" data-category="Rooms">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+         <div class="filter" data-category="Iconic Cities">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+
+        <div class="filter" data-category="Mountain">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountain</p>
+        </div>
+         <div class="filter" data-category="Castles">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+
+        <div class="filter" data-category="Swimming">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Swimming</p>
+        </div>
+         <div class="filter" data-category="Farm">
+            <div><i class="fa-solid fa-tractor"></i></div>
+            <p>Farm</p>
+        </div>
+
+        <div class="filter" data-category="Camping">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+         <div class="filter" data-category="Dome">
+            <div><i class="fa-solid fa-landmark-dome"></i></div>
+            <p>Domes</p>
+        </div>
+
+        <div class="filter" data-category="Boat">
+            <div><i class="fa-solid fa-ship"></i></div>
+            <p>Boat</p>
+        </div>
+
+        <div class="filter" data-category="Arctic">
+            <div><i class="fa-solid fa-snowman"></i></div>
+            <p>Arctic</p>
+        </div>
+        <div class="switch-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Total Amount after tax</label>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- <h3 class="mt-3">All Listings:</h3> -->
+<% if(allListings.length === 0){ %>
+    <div class="col-12 text-center mt-5 no-results ">
+                    <h4 class="mt-3">No listings found !</h4>
+                    <a href="/listings" class="btn btn-primary mt-3 mb-3">View All Listings</a>
+                </div>
+<% } else { %>
+        <div class="row row-cols-lg-3  row-cols-md-2 row-cols-sm-1 mt-3">
+                 <%for(listing of allListings){%>
+                        <a href="/listings/<%=listing._id%>" class="listing-links">
+                                <div class="card listing-card">
+            <img src="<%= listing.image.url%>" class="card-img-top" alt="Listing Image" style="height: 20rem;">
+             <div class="card-img-overlay"></div>
+            <div class="card-body">
+                <p class="card-text">
+                     <b> <%= listing.title %> </b><br>
+                     &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+                     &nbsp; &nbsp; <b class="tax-info">+18% GST</b>
+                </p>
+            </div>
+        </div>
+                        </a>
+             <% }%>
+
+        </div>
+<% } %>
+   
+
+</form>
+
+<script>
+    const activeCategory = "<%= typeof activeCategory !== 'undefined' && activeCategory ? activeCategory : '' %>";
+    let switchToggle=document.getElementById("switchCheckDefault");
+    switchToggle.addEventListener("click",()=>{
+        let taxInfo=document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            if(info.style.display != "inline")
+            {
+                    info.style.display="inline"
+            }
+            else{
+                info.style.display="none"
+            }
+            
+        }
+    })
+
+    // Filter functionality
+    document.addEventListener("DOMContentLoaded", function() {
+        const filterButtons = document.querySelectorAll(".filter[data-category]");
+        if(activeCategory){
+            filterButtons.forEach(b=>{
+                if(b.getAttribute("data-category")===activeCategory){
+                    b.classList.add("active");
+                }
+            });
+        }
+        filterButtons.forEach(button => {
+            button.style.cursor = "pointer";
+            button.addEventListener("click", function() {
+                filterButtons.forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+                const category = this.getAttribute("data-category");
+                window.location.href = `/listings/filter/category?category=${encodeURIComponent(category)}`;
+            });
+        });
+    });
+</script>
+</body>
+
