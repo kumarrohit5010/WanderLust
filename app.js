@@ -24,6 +24,10 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js")
 
+function normalizeLoginIdentifier(value) {
+    return String(value || "").trim();
+}
+
 // for session of the webpages
 const session=require("express-session");
 const MongoStore = require('connect-mongo').default;
@@ -96,8 +100,34 @@ app.use(flash());
 app.use(passport.initialize())
 app.use(passport.session())
 
-// use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(async (username, password, done) => {
+    try {
+        const identifier = normalizeLoginIdentifier(username);
+        const lowerIdentifier = identifier.toLowerCase();
+
+        const user = await User.findOne({
+            $or: [
+                { username: identifier },
+                { username: lowerIdentifier },
+                { email: identifier },
+                { email: lowerIdentifier },
+            ],
+        });
+
+        if (!user) {
+            return done(null, false, { message: "Password or username is incorrect." });
+        }
+
+        const { user: authenticatedUser, error } = await user.authenticate(password);
+        if (!authenticatedUser) {
+            return done(null, false, error || { message: "Password or username is incorrect." });
+        }
+
+        return done(null, authenticatedUser);
+    } catch (err) {
+        return done(err);
+    }
+}));
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());

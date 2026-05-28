@@ -1,12 +1,19 @@
 <% if(success && success.length ){ %>
-    <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert"><%= success %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
-    
-<%}%>
-
+    <% success.forEach((msg) => { %>
+        <div class="flash-banner flash-success alert alert-success alert-dismissible fade show" role="alert" data-flash-message>
+            <div class="flash-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="flash-content"><%= msg %></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }) %>
+<% } %>
 
 <% if(error && error.length ){ %>
-    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert"><%= error %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
-    
-<%}%>
+    <% error.forEach((msg) => { %>
+        <div class="flash-banner flash-error alert alert-danger alert-dismissible fade show" role="alert" data-flash-message>
+            <div class="flash-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="flash-content"><%= msg %></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }) %>
+<% } %>

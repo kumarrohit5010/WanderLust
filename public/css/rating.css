@@ -195,3 +195,238 @@
   -webkit-transition: background-position .7s;
   transition: background-position .7s;
 }
+
+/* ========================================
+   RESPONSIVE MEDIA QUERIES FOR RATINGS
+   ======================================== */
+
+/* Mobile Phones - Portrait & Landscape (max-width: 480px) */
+@media only screen and (max-width: 480px) {
+  .starability-result {
+    width: 100px;
+    height: 20px;
+    background-size: 20px auto;
+  }
+  
+  .starability-result:after {
+    height: 20px;
+    background-size: 20px auto;
+    background-position: 0 -20px;
+  }
+  
+  .starability-result[data-rating="5"]::after {
+    width: 100px;
+  }
+  
+  .starability-result[data-rating="4"]::after {
+    width: 80px;
+  }
+  
+  .starability-result[data-rating="3"]::after {
+    width: 60px;
+  }
+  
+  .starability-result[data-rating="2"]::after {
+    width: 40px;
+  }
+  
+  .starability-result[data-rating="1"]::after {
+    width: 20px;
+  }
+  
+  .starability-slot {
+    width: 100px;
+    min-height: 40px;
+  }
+  
+  .starability-slot > label {
+    width: 20px;
+    height: 20px;
+    background-size: 20px auto;
+    background-position: 0 -20px;
+  }
+  
+  .starability-slot > label::before {
+    height: 20px;
+    background-size: 20px auto;
+    background-position: 0 20px;
+  }
+  
+  .starability-slot > label:nth-of-type(5)::before {
+    width: 80px;
+    left: -80px;
+  }
+  
+  .starability-slot > label:nth-of-type(4)::before {
+    width: 60px;
+    left: -60px;
+  }
+  
+  .starability-slot > label:nth-of-type(3)::before {
+    width: 40px;
+    left: -40px;
+  }
+  
+  .starability-slot > label:nth-of-type(2)::before {
+    width: 20px;
+    left: -20px;
+  }
+  
+  .starability-slot .starability-focus-ring {
+    height: 20px;
+  }
+}
+
+/* Mobile Phones Landscape & Small Tablets (481px to 767px) */
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .starability-result {
+    width: 120px;
+    height: 24px;
+    background-size: 24px auto;
+  }
+  
+  .starability-result:after {
+    height: 24px;
+    background-size: 24px auto;
+    background-position: 0 -24px;
+  }
+  
+  .starability-result[data-rating="5"]::after {
+    width: 120px;
+  }
+  
+  .starability-result[data-rating="4"]::after {
+    width: 96px;
+  }
+  
+  .starability-result[data-rating="3"]::after {
+    width: 72px;
+  }
+  
+  .starability-result[data-rating="2"]::after {
+    width: 48px;
+  }
+  
+  .starability-result[data-rating="1"]::after {
+    width: 24px;
+  }
+  
+  .starability-slot {
+    width: 120px;
+    min-height: 48px;
+  }
+  
+  .starability-slot > label {
+    width: 24px;
+    height: 24px;
+    background-size: 24px auto;
+    background-position: 0 -24px;
+  }
+  
+  .starability-slot > label::before {
+    height: 24px;
+    background-size: 24px auto;
+    background-position: 0 24px;
+  }
+  
+  .starability-slot > label:nth-of-type(5)::before {
+    width: 96px;
+    left: -96px;
+  }
+  
+  .starability-slot > label:nth-of-type(4)::before {
+    width: 72px;
+    left: -72px;
+  }
+  
+  .starability-slot > label:nth-of-type(3)::before {
+    width: 48px;
+    left: -48px;
+  }
+  
+  .starability-slot > label:nth-of-type(2)::before {
+    width: 24px;
+    left: -24px;
+  }
+  
+  .starability-slot .starability-focus-ring {
+    height: 24px;
+  }
+}
+
+/* Tablets Portrait (768px to 991px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .starability-result {
+    width: 135px;
+    height: 27px;
+    background-size: 27px auto;
+  }
+  
+  .starability-result:after {
+    height: 27px;
+    background-size: 27px auto;
+    background-position: 0 -27px;
+  }
+  
+  .starability-result[data-rating="5"]::after {
+    width: 135px;
+  }
+  
+  .starability-result[data-rating="4"]::after {
+    width: 108px;
+  }
+  
+  .starability-result[data-rating="3"]::after {
+    width: 81px;
+  }
+  
+  .starability-result[data-rating="2"]::after {
+    width: 54px;
+  }
+  
+  .starability-result[data-rating="1"]::after {
+    width: 27px;
+  }
+  
+  .starability-slot {
+    width: 135px;
+    min-height: 54px;
+  }
+  
+  .starability-slot > label {
+    width: 27px;
+    height: 27px;
+    background-size: 27px auto;
+    background-position: 0 -27px;
+  }
+  
+  .starability-slot > label::before {
+    height: 27px;
+    background-size: 27px auto;
+    background-position: 0 27px;
+  }
+  
+  .starability-slot > label:nth-of-type(5)::before {
+    width: 108px;
+    left: -108px;
+  }
+  
+  .starability-slot > label:nth-of-type(4)::before {
+    width: 81px;
+    left: -81px;
+  }
+  
+  .starability-slot > label:nth-of-type(3)::before {
+    width: 54px;
+    left: -54px;
+  }
+  
+  .starability-slot > label:nth-of-type(2)::before {
+    width: 27px;
+    left: -27px;
+  }
+  
+  .starability-slot .starability-focus-ring {
+    height: 27px;
+  }
+}

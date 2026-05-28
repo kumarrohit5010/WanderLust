@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-xl-10">
+      <section class="hero-panel profile-hero mb-4">
+        <div class="position-relative d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="profile-avatar">
+              <%= (user.firstName || user.username || "U").trim().charAt(0).toUpperCase() %>
+            </div>
+            <div>
+              <div class="hero-badge mb-2"><i class="fa-solid fa-id-card"></i> Account Profile</div>
+              <h1 class="mb-1"><%= user.firstName || user.username %> <%= user.lastName || "" %></h1>
+              <p class="mb-0">Manage your account details and review the information tied to your WanderLust profile.</p>
+            </div>
+          </div>
+
+          <div class="profile-quick-actions">
+            <a href="/forgot-password" class="btn btn-outline-dark btn-sm">Change Password</a>
+            <a href="/listings" class="btn btn-success btn-sm">Browse Listings</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-lg-7">
+          <div class="auth-card h-100 profile-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h4 class="mb-0">Profile Details</h4>
+              <span class="profile-chip">Active account</span>
+            </div>
+
+            <div class="profile-info-grid">
+              <div class="profile-info-item">
+                <span>Username</span>
+                <strong><%= user.username || "Not set" %></strong>
+              </div>
+              <div class="profile-info-item">
+                <span>Email</span>
+                <strong><%= user.email || "Not set" %></strong>
+              </div>
+              <div class="profile-info-item">
+                <span>First Name</span>
+                <strong><%= user.firstName || "Not set" %></strong>
+              </div>
+              <div class="profile-info-item">
+                <span>Last Name</span>
+                <strong><%= user.lastName || "Not set" %></strong>
+              </div>
+              <div class="profile-info-item">
+                <span>Age</span>
+                <strong><%= user.age || "Not set" %></strong>
+              </div>
+              <div class="profile-info-item">
+                <span>Gender</span>
+                <strong><%= user.gender || "Not set" %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="auth-card h-100 profile-sidecard">
+            <h4 class="mb-3">Account Snapshot</h4>
+
+            <div class="profile-stat-list">
+              <div class="profile-stat-row">
+                <span>Display name</span>
+                <strong><%= user.firstName || user.username || "User" %></strong>
+              </div>
+              <div class="profile-stat-row">
+                <span>Login email</span>
+                <strong><%= user.email || "Not set" %></strong>
+              </div>
+              <div class="profile-stat-row">
+                <span>Password</span>
+                <strong>Protected by Passport</strong>
+              </div>
+            </div>
+
+            <div class="profile-note mt-4">
+              <i class="fa-solid fa-circle-info"></i>
+              <p class="mb-0">Your account currently uses the email address above for login and password recovery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

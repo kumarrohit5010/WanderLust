@@ -3,7 +3,7 @@
     color: white;
     background:#fe424d;
     border-radius: 25px;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
   .search-btn:hover{
@@ -17,9 +17,40 @@
     font-size: 0.8rem;
   }
   .search-inp{
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 1rem;
     font-size: 0.8rem;
     border-radius: 25px;
+  }
+
+  .user-toggle{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: #f7f7f7;
+    border: 1px solid #ececec;
+    white-space: nowrap;
+  }
+
+  .user-toggle i{
+    color: #fe424d;
+  }
+
+  .user-toggle .user-meta{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-align: left;
+  }
+
+  .user-toggle .user-email{
+    font-size: 0.78rem;
+    color: #6c757d;
+  }
+
+  .navbar-nav .dropdown-menu{
+    min-width: 14rem;
   }
 </style>
 
@@ -27,17 +58,17 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="#navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" aria-hidden="true"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
-      <div class="ms-auto">
-        <form class="d-flex " role="search" action="/listings/search" method="get">
-          <input class="form-control me-2 search-inp" type="search" name="q" placeholder="Search Destinations" aria-label="Search" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>" />
+      <div class="ms-auto search-wrap">
+        <form class="search-form" role="search" action="/listings/search" method="get">
+          <input class="form-control search-inp" type="search" name="q" placeholder="Search Destinations" aria-label="Search" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>" />
           <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </form>
       </div>
@@ -51,7 +82,26 @@
           <%}%>
 
            <%if(currentUser){%>
-          <a class="nav-link" href="/logout"><b>LogOut</b></a>
+          <div class="dropdown ms-2">
+            <button class="btn user-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+              <div class="user-meta">
+                <span class="fw-semibold"><%= currentUser.username || "User" %></span>
+                <span class="user-email"><%= currentUser.email || "" %></span>
+              </div>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="dropdown-item-text">
+                <div class="fw-semibold">Signed in as</div>
+                <div class="small text-muted"><%= currentUser.username || "User" %></div>
+                <div class="small text-muted"><%= currentUser.email || "" %></div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">LogOut</a></li>
+            </ul>
+          </div>
           <%}%>
         
         

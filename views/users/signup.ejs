@@ -2,8 +2,9 @@
 
 <body>
     <div class="row mt-3">
-  <div class="col-4 offset-4">
-     <h4>SignUp</h4>
+  <div class="col-12 col-sm-10 col-md-6 col-lg-4 mx-auto">
+  <div class="auth-card">
+  <h4 class="mb-3">Sign Up</h4>
     <form action="/signup" method="post" novalidate class="needs-validation">
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
@@ -11,12 +12,60 @@
           type="text"
           name="username"
           id="username"
-          placeholder="Enter Username: "
+          placeholder="Choose a username (optional)"
+          class="form-control"
+          autocomplete="username"
+        />
+        <div class="form-text">If you leave this blank, your email address will be used as the username.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name:</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          placeholder="Enter First Name: "
           class="form-control"
           required
         />
-        <!-- <div class="invalid-feedback">Enter Accurate Title!</div> -->
-        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name:</label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          placeholder="Enter Last Name: "
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="age" class="form-label">Age:</label>
+        <input
+          type="number"
+          name="age"
+          id="age"
+          placeholder="Enter Age"
+          class="form-control"
+          min="1"
+          max="120"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender:</label>
+        <select name="gender" id="gender" class="form-select" required>
+          <option value="" selected disabled>Choose Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
       </div>
 
       <div class="mb-3">
@@ -25,26 +74,17 @@
           type="email"
           name="email"
           id="email"
-          placeholder="Enter Email: "
+          placeholder="Enter Email Address: "
           class="form-control"
+          autocomplete="email"
           required
         />
+        <div class="invalid-feedback">Please enter a valid email address.</div>
       </div>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Enter  Password: "
-          class="form-control"
-          required
-        />
-      </div>
-
-      <button class="btn btn-success mt-3">SignUp</button>
+      <button class="btn btn-success mt-3 w-100" type="submit">Next</button>
     </form>
+    </div>
   </div>
 </div>
 </body>
