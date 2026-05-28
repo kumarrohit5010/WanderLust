@@ -53,7 +53,10 @@ async function sendOtpEmail(email, otp) {
   const senderEmail = parseSenderEmail(process.env.BREVO_SENDER_EMAIL || process.env.FROM_EMAIL || process.env.EMAIL_USER);
 
   if (!apiKey || !senderEmail) {
-    throw new Error("Brevo sender email is not configured. Set FROM_EMAIL or BREVO_SENDER_EMAIL to a verified Brevo sender.");
+    const missingConfig = [];
+    if (!apiKey) missingConfig.push("BREVO_API_KEY");
+    if (!senderEmail) missingConfig.push("BREVO_SENDER_EMAIL/FROM_EMAIL");
+    throw new Error(`Brevo OTP config missing: ${missingConfig.join(", ")}.`);
   }
 
   await axios.post(
@@ -138,8 +141,9 @@ module.exports.postSignUp=async (req, res) => {
         return res.redirect("/signup");
       }
 
-      if (!process.env.BREVO_API_KEY) {
-        req.flash("error", "Brevo OTP is not configured yet.");
+      const senderEmail = parseSenderEmail(process.env.BREVO_SENDER_EMAIL || process.env.FROM_EMAIL || process.env.EMAIL_USER);
+      if (!process.env.BREVO_API_KEY || !senderEmail) {
+        req.flash("error", "Brevo OTP is not configured yet. Missing BREVO_API_KEY or BREVO_SENDER_EMAIL.");
         return res.redirect("/signup");
       }
 
